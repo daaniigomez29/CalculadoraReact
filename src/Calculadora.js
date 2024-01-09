@@ -10,18 +10,24 @@ function Calculadora() {
   const[anterior, anteriorState] = useState('0')
 
   const handleButtonClick = (numero) =>{
-    resultState(result === '0' && numero != '+' && numero != '-' && numero != '*' && numero != '/' && numero != '%'  ? numero : result + numero) 
+    resultState(result === '0' && numero != '+' && numero != '-' && numero != '*' && numero != '/' && numero != '%' && numero != '.'  ? numero : result + numero)
+    anteriorState(numero != '+/-' ? result + numero : '') 
   }
 
   const handleButtonBorrar = () =>{
     resultState('0')
+    anteriorState('0')
   }
 
   const resultado = (result) =>{
-    resultState(math.evaluate(result))
+    !['+','-','*','/','%'].some(symbol => result.includes(symbol)) || !result.length <= 2 ? resultState(result) : resultState(math.evaluate(result))
   }
 
-  const cambiarSigno = (result) =>{
+  const cambiarSigno = (anterior) =>{
+    const nuevoAnterior = anterior >= 0 ? -anterior : math.abs(anterior)
+    console.log(anterior)
+    anteriorState(nuevoAnterior)
+    resultState(nuevoAnterior)
   }
 
   return (
@@ -31,7 +37,7 @@ function Calculadora() {
           <div className='pantallaResultado'><h2 className='black'>{result}</h2></div>
           <div className='botones'>
           <Button className = {"grid-item"} onClick={handleButtonBorrar} numero = {'C'}></Button>
-          <Button className = {"grid-item"} onClick={cambiarSigno} numero = {'+/-'}></Button>
+          <Button className = {"grid-item"} onClick={() => cambiarSigno(anterior)} numero = {'+/-'}></Button>
           <Button className = {"grid-item"} onClick ={handleButtonClick} numero = {'%'}></Button>
           <Button className = {"grid-item"} onClick ={handleButtonClick} numero = {'/'}></Button>
           <Button className = {"grid-item"} onClick ={handleButtonClick} numero = {'7'}></Button>
