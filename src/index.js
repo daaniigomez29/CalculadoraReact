@@ -4,6 +4,8 @@ import './index.css';
 import Calculadora from './Calculadora';
 import reportWebVitals from './reportWebVitals';
 
+document.title = "Calculadora con React"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

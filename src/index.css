@@ -50,10 +50,31 @@ border-radius: 10px;
   font-size: 30px;
 }
 
-.black{
+.textoResultado{
   position: relative;
   color: black;
   display: flex;
   justify-content: end;
   align-items: center;
 }
+
+@media screen and (max-width: 600px) {
+  .grid-item,
+  .boton-ampliado {
+    font-size: 20px; /* Reducir aún más el tamaño de la fuente en pantallas más pequeñas */
+  }
+  .pantallaResultado,
+  .botones{
+    margin-top: 2%;
+    width: 70vw;
+  }
+
+  .calculadora{
+    width: 80vw;
+  }
+
+  .textoResultado{
+    font-size: 40px;
+  }
+}
+
